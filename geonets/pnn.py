@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from geo import sympnet, inn
+from geonets import sympnet, inn
 
 
 class PNN(nn.Module):

@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from tqdm import trange
 
-from geo.pnn import PNN
+from geonets.pnn import PNN
 
 BATCH_SIZE = 128
 EPOCHS = 100_000
@@ -78,7 +78,7 @@ znp = pd.z.detach().numpy()
 trainloader = torch.utils.data.DataLoader(pd, batch_size=BATCH_SIZE, shuffle=True)
 
 try:
-    pnn = torch.load("./geo/test/output/em_particle.pt")
+    pnn = torch.load("./geonets/test/output/em_particle.pt")
     print("Loaded existing model")
 except FileNotFoundError:
     pnn = PNN(
@@ -110,7 +110,7 @@ with trange(EPOCHS) as tepoch:
 
             tepoch.set_postfix(loss=loss.item())
 
-torch.save(pnn, "./geo/test/output/em_particle.pt")
+torch.save(pnn, "./geonets/test/output/em_particle.pt")
 
 N_NEXT = 1000
 x_next = torch.zeros(N_NEXT, 6)

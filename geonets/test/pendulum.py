@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from tqdm import trange
 
-import geo.sympnet as sn
+import geonets.sympnet as sn
 
 BATCH_SIZE = 128
 EPOCHS = 500_000
@@ -53,7 +53,7 @@ znp = pd.z.detach().numpy()
 trainloader = torch.utils.data.DataLoader(pd, batch_size=BATCH_SIZE, shuffle=True)
 
 try:
-    sympnet = torch.load("./geo/test/output/pendulum_sympnet.pt")
+    sympnet = torch.load("./geonets/test/output/pendulum_sympnet.pt")
     print("Loaded existing model")
 except FileNotFoundError:
     sympnet = sn.LASympNet(1, nlayers=3, subwidth=4)
@@ -77,7 +77,7 @@ with trange(EPOCHS) as tepoch:
 
             tepoch.set_postfix(loss=loss.item())
 
-torch.save(sympnet, "./geo/test/output/pendulum_sympnet.pt")
+torch.save(sympnet, "./geonets/test/output/pendulum_sympnet.pt")
 
 N_NEXT = 1000
 x_next = torch.zeros(N_NEXT, 2)
